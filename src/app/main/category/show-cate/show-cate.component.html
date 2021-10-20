@@ -1,0 +1,24 @@
+<div class="main-content container-fluid">
+
+    <div class="page-title">
+        <h3>Danh sách {{ branch.name }}</h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-left">
+                <li class="breadcrumb-item"><a [routerLink]="['/main/'+[branch.route]+'/index']">Quản lý {{ branch.name }}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Dánh sách danh mục</li>
+            </ol>
+        </nav>
+    </div>
+    <app-show 
+    [branch]="branch" 
+    [headerTbl]="headerTbl"
+    [propsData]="propsData" 
+    [data]="_listCategory" 
+    [pagination]="pagination"
+    (onPageChange)="handlePageChange($event)" 
+    (onOptionChange)="handleOptionChange($event)"
+    (onSearchChange)="handleSearchChange($event)"
+    (onDelete)="handleDelete($event)"
+    ></app-show>
+</div>

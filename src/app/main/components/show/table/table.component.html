@@ -1,0 +1,74 @@
+<table class="table ">
+    <thead>
+        <tr>
+            <th *ngFor="let i of headerTbl" [style]="'width:' + i.Width">
+                {{
+                i.Name
+                }}
+            </th>
+            <th scope="col" style="width: 20%">Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let i of data">
+            <th scope="row">{{ i.rowNumber }}</th>
+            <td *ngFor="let p of propsData">
+                <ng-container *ngIf="!p.pipe">
+                    <ng-container *ngIf="p.key == 'image'">
+                        <img style="width: 80%" [src]="i[p.key]" alt="">
+                    </ng-container>
+                    <ng-container *ngIf="p.key != 'image'">
+                        {{ i[p.key] }}
+                    </ng-container>
+                </ng-container>
+                <ng-container *ngIf="p.pipe">
+                    <container-element [ngSwitch]="p.pipe">
+                        <!-- the same view can be shown in more than one case -->
+                        <ng-container *ngSwitchCase="'number'">{{ i[p.key] | number }}</ng-container>
+
+                        <ng-container *ngSwitchDefault>{{ i[p.key] }}</ng-container>
+                    </container-element>
+                </ng-container>
+
+
+
+            </td>
+            <td>
+                <a *ngIf="branch.route == 'user'" type="button" class="mb-2 btn btn-warning mr-3"
+                    [routerLink]="['/main/'+ branch.route +'/permision/' + i[key]]"><i class=" fa fa-key"></i></a><br>
+                <a type="button" class="btn btn-info mr-3"
+                    [routerLink]="['/main/'+ branch.route +'/update/' + i[key]]">Chỉnh sửa</a>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteRecord"
+                    [attr.data-id]="i[key]">Xóa</button>
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+<div *ngIf="data?.length <= 0" class="alert alert-danger" role="alert">
+    Hiện tại chưa có bản ghi nào.
+</div>
+
+<div class="modal fade" id="deleteRecord" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cảnh báo:</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Sau khi xóa bản ghi sẽ không thể khôi phục lại.<br />Bạn có muốn tiếp tục.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary btn-dismiss-modal close-modal" type="button"
+                    data-dismiss="modal">Thoát</button>
+                <button class="btn btn-danger" (click)="eventDelete()" href="login.html">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="main-content container-fluid">
+    <div class="page-title">
+        <h3>Cập nhập {{ branch.name }}</h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-left">
+                <li class="breadcrumb-item"><a [routerLink]="['/main/'+[branch.route]+'/index']">Quản lý {{ branch.name }}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Cập nhập {{ branch.name }}</li>
+            </ol>
+        </nav>
+    </div>
+    <section class="panel card">
+        <div style="text-align: center; padding: 20px 0" class="panel-heading">
+            <h3 class="panel-title mg-auto font-italic"><u>Nhập thông tin</u></h3>
+        </div>
+        <div class="panel-body mb-3">
+            <form class="form" id="form-1">
+
+                <ng-container *ngFor="let i of inputs">
+                    <app-input [props]="i" [keyImage]="keyImage"></app-input>
+                </ng-container>
+
+                <app-select 
+                [data]="select" 
+                [branch]="branch"
+                (onOptionChange)="handleOptionChange($event)"
+                ></app-select>
+                
+                <div class="form-group col colg-9" >
+                    <label for="password_confirmation" class="form-label">Mô Tả Sản Phẩm:</label>
+                    <ckeditor  [(ngModel)]="model.editorData" name="description" [editor]="Editor"></ckeditor>
+                </div>
+                
+                <div class="btn btn-danger ml-3 mr-3 mt-4" (click)="backPage()">Thoát</div>
+                <button class="btn btn-success form-submit mt-4">Lưu thông tin</button>
+            </form>
+        </div>
+        
+    </section>
+</div>
+
+

@@ -1,0 +1,7 @@
+<select class="form-select" (change)="onChange($event.target)" aria-label="Default select example">
+    <option 
+    *ngFor="let i of options"  
+    [value]="i" 
+    [selected]=" i== pagination.PageSize"
+    >{{ i }}</option>
+</select>

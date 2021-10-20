@@ -1,0 +1,28 @@
+<div class="form-group" [ngClass]="props.width">
+    <label for="password_confirmation" class="form-label">{{ props.label }}</label>
+    <ng-container *ngIf="props.type !== 'file'">
+        <input 
+        [id]="props.id" 
+        [name]="props.name" 
+        [placeholder]="props.placeholder" 
+        [type]="props.type"
+        [ngClass]="props.type"
+        [value]="props.value" 
+        (change)="changVal($event)"
+        class="form-control">
+    </ng-container>
+    <ng-container *ngIf="props.type == 'file'">
+        <input 
+        [id]="props.id" 
+        [name]="props.name" 
+        [placeholder]="props.placeholder" 
+        [type]="props.type"
+        [ngClass]="props.type"
+        (change)="changVal($event)"
+
+        class="form-control">
+    </ng-container>
+    <img id="blah" class="mt-2" *ngIf="props.type == 'file'" style="width: 400px" [src]="props.value" alt="">
+    <div class="form-message text-danger mt-2 ml-2">
+    </div>
+</div>

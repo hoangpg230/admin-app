@@ -1,0 +1,33 @@
+<section class="section">
+    <div class="card">
+        <div class=" card-header bg-white">
+            <u style="color: #0dcaf0; cursor: pointer;" class="font-italic"> Bảng danh sách {{ branch.name }}</u>
+        </div>
+        <a class="pd-0 col-3 mt-3 mb-3" [routerLink]="['/main/'+[branch.route]+'/create']">
+            <button type="button" class=" btn btn-success"><i class="mr-2  fas fa-plus"></i>Thêm {{ branch.name
+                }}</button>
+        </a>
+        <div class="navbar  bg-white">
+            <div class="form-group pull-left page-size form-inline">
+                <app-option [pagination]="pagination" (onOptionChange)="handleOptionChange($event)"></app-option>
+            </div>
+
+            <div class="d-flex">
+                <input class="form-control mr-1" type="search" placeholder="Search" #search aria-label="Search">
+                <button type="button" class="btn btn-success" (click)="handleSearch(search)">Search</button>
+            </div>
+        </div>
+        <div class="card-body pt-0">
+            <app-table 
+            [headerTbl]="headerTbl" 
+            [propsData]="propsData"
+            [data]="data" 
+            [branch]="branch" 
+            (onDelete)="handleDelete($event)"></app-table>
+        </div>
+        <nav class="navbar">
+            <app-paginate [pagination]="pagination" (onPageChange)="handlePageChange($event)"></app-paginate>
+        </nav>
+    </div>
+
+</section>

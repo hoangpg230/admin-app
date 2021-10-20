@@ -1,0 +1,24 @@
+<ul class="pagination">
+    <li class="page-item " [ngClass]="{disabled: pagination.PageNo==1}">
+        <a class="page-link" href="#" (click)="handlePageChange($event, 1)">First</a>
+    </li>
+    <li class="page-item " [ngClass]="{disabled: pagination.PageNo==1}">
+        <a class="page-link" href="#" (click)="handlePageChange($event, pagination.PageNo - 1)">Previous</a>
+    </li>
+
+    <li *ngFor="let page of arrayPage" class="page-item"
+        [ngClass]="{ active: page == pagination.PageNo, disabled: page == '...' || page == '... '  || page == ' ...' }">
+        <a class="page-link" href="#" (click)="handlePageChange($event, page)">
+            {{ page }}
+        </a>
+    </li>
+
+    <li class="page-item" [ngClass]="{disabled: pagination.PageNo >= pages}">
+        <a class="page-link" href="#" (click)="handlePageChange($event, pagination.PageNo + 1)"> Next</a>
+    </li>
+    <li class="page-item" [ngClass]="{disabled: pagination.PageNo >= pages}">
+        <a class="page-link" href="#" (click)="handlePageChange($event, pages)">
+            Last
+        </a>
+    </li>
+</ul>
